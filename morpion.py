@@ -2,18 +2,22 @@
 
 from copy import deepcopy
 
+#Fonction pour afficher dans la console
 def Draw(grille):
     result = "\n"
     i = 0
     rowCount = 0
+    #Boucle toute les valeurs de la grille
     for i in range(9):
         rowCount += 1
         result += "|" + str(grille[i]) + " "
+        #Pour faire une nouvelle ligne
         if(rowCount == 3):
             rowCount = 0
             result += "|\n--- --- ---\n"
     print(result)
 
+#Fonction pour savoir si l'on peut poser sur la case spécifier
 def TestCase(key, grille):
     k = int(key) - 1
     if(k < 0 or k > 8):
@@ -22,7 +26,9 @@ def TestCase(key, grille):
         return 11
     return k
 
+#Renvoie le symbole du vainqueur s'il y en a un
 def TestWin(grille):
+    
     #Test des lignes
     if (grille[0]==grille[1]) and (grille[0]==grille[2]) and (grille[0]!=" "):
         return grille[0]
@@ -30,6 +36,7 @@ def TestWin(grille):
         return grille[3]
     if (grille[6]==grille[7]) and (grille[6]==grille[8]) and (grille[6]!=" "):
         return grille[6]
+    
     #Test des colonne
     if (grille[0]==grille[3]) and (grille[0]==grille[6]) and (grille[0]!=" "):
         return grille[0]
@@ -37,12 +44,14 @@ def TestWin(grille):
         return grille[1]
     if (grille[2]==grille[5]) and (grille[2]==grille[8]) and (grille[2]!=" "):
         return grille[2]
+    
     #Test des diagonales
     if (grille[0]==grille[4]) and (grille[0]==grille[8]) and (grille[0]!=" "):
         return grille[0]
     if (grille[2]==grille[4]) and (grille[2]==grille[6]) and (grille[2]!=" "):
         return grille[2]
 
+#Prise de décision de l'IA
 def IAMove(grille):
     #Prevoir un tour
     for i in range(9):
@@ -67,8 +76,10 @@ def IAMove(grille):
         testGrille[i] = ' '
     return GetBestPos(grille)
 
+#Pour avoir la meilleur position pour poser
 def GetBestPos(grille):
     caseFree = []
+    #Boucle pour récupérer les cases libres
     for i in range(9):
         if(grille[i] != 'X' and grille[i] != 'O'):
             caseFree.append(i)
@@ -84,9 +95,7 @@ def GetBestPos(grille):
         return 8
     return caseFree[0]
 
-    
-    
-
+#Retourne si la grille est remplie
 def TestGrilleFull(grille):
     i = 0
     for i in range(9):
@@ -94,6 +103,7 @@ def TestGrilleFull(grille):
             return False
     return True
 
+#Boucle du jeu
 def Game():
     scoreJ1 = 0
     scoreIA = 0
