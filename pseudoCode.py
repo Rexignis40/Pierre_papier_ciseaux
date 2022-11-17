@@ -43,56 +43,50 @@
         #Alors retourner la variable de la grille à l'index 0
 
 #Prise de décision de l'IA
-def IAMove(grille):
+#Définir la fonction IAMove ayant comme paramètre grille
     #Prevoir un tour
-    for i in range(9):
-        testGrille = deepcopy(grille)
-        if(testGrille[i] == 'X' or testGrille[i] == 'O'):
-            continue
-        testGrille[i] = 'X'
+    #Tant que i est inférieur à 9
+        #Assigner à testGrille, deepcopy(grille)
+        #Si le tableau testGrille ayant comme paramètre i est strictement égal à 'X' ou 'O'
+            #Continuer
+        #Assigner à testGrille ayant comme paramètre i, 'X'
         #Test IA vixctoire
-        if(TestWin(testGrille) == 'X'):
-            return i
-        testGrille[i] = 'O'
-        if(TestWin(testGrille) == 'O'):
-            return i
+        #Si TestWin ayant comme paramètre testGrille est égal à 'X'
+            #Retourner i
+        #Assigner à testGrille ayant comme paramètre i, 'O' 
+        #Si TestWin ayant comme paramètre testGrille est égal à 'O'
+            #Retourner i
         #Prevoir deux tour
-        for j in range(9):
-            if(testGrille[j] == 'X' or testGrille[j] == 'O'):
-                continue
-            testGrille[j] = 'O'
-            if(TestWin(grille) == 'O'):
-                return j
-            testGrille[j] = ' '
-        testGrille[i] = ' '
-    return GetBestPos(grille)
+        #Tant que j est inférieur à 9
+            #Si le tableau testGrille ayant comme paramètre j est égal à 'X' ou 'O'
+                #Continuer
+            #Assigner à testGrille ayant comme paramètre j, 'O'
+            #Si TestWin ayant comme paramètre grille est égal à 'O'
+                #Retourner j
+            #Assigner à testGrille ayant comme paramètre j, ' '
+        #Assigner à testGrille ayant comme paramètre i, ' '
+    #Retourner GetBestPos ayant comme paramètre grille
 
 #Pour avoir la meilleur position pour poser
-def GetBestPos(grille):
-    caseFree = []
+#Définir la fonction GetBestPos ayant comme paramètre grille
+    #Assigner à caseFree, [], un tableau vide 
     #Boucle pour récupérer les cases libres
-    for i in range(9):
-        if(grille[i] != 'X' and grille[i] != 'O'):
-            caseFree.append(i)
-    if(4 in caseFree):
-        return 4
-    if(0 in caseFree):
-        return 0
-    if(2 in caseFree):
-        return 2
-    if(6 in caseFree):
-        return 6
-    if(8 in caseFree):
-        return 8
-    return caseFree[0]
+    #Tant que i est inférieur à 9
+        #Si le tableau grille ayant comme paramètre i n'est pas égal à 'X' et 'O'
+            #Donner à caseFree.append le paramètre i
+    #Si on trouve 4 dans caseFree
+        #Retourner 4
+    #Si on trouve 0 dans caseFree
+        #Retourner 0
+    #Si on trouve 2 dans caseFree
+        #Retourner 2
+    #Si on trouve 6 dans caseFree
+        #Retourner 6
+    #Si on trouve 8 dans caseFree
+        #Retourner 8
+    #Retourner caseFree ayant comme paramètre 0
 
 #Retourne si la grille est remplie
-def TestGrilleFull(grille):
-    i = 0
-    for i in range(9):
-        if(grille[i] != 'O' and grille[i] != 'X'):
-            return False
-    return True
 
 #Definir la fonction de la boucle du jeu
     #Assignier 0 à scoreJ1
