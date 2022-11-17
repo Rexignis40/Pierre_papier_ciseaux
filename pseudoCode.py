@@ -94,52 +94,61 @@ def TestGrilleFull(grille):
             return False
     return True
 
-#Boucle du jeu
-def Game():
-    scoreJ1 = 0
-    scoreIA = 0
-    grille = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    whichTurn = False
-    Draw(grille)
-    isPlay = True
-    while isPlay:
-        if(whichTurn):
-            grille[IAMove(grille)] = 'X'
-            whichTurn = False
-            Draw(grille)
-        else:
-            key = input("\nentrée votre numéro de case\nScore: s, Reset: r, Exit e\n")
-            if(key == 's'):
-                print("\nSCORE JOUEUR 1: " + str(scoreJ1) + "\nSCORE JOUEUR IA: " + str(scoreIA))
-            elif (key == 'r'):
-                scoreJ1 = 0
-                scoreIA = 0
-            elif (key == 'e'):
-                isPlay = False
-            else:
-                result = TestCase(key, grille)
-                if(result == 11):
-                    print("case déjà prise")
-                elif(result == 10):
-                    print("Mauvais input")
-                else:
-                    grille[result] = 'O'
-                    whichTurn = True
-                    Draw(grille)
-        w = TestWin(grille)
-        if(w == 'O'):
-            scoreJ1 += 1
-            print("Joueur 1 à gagner")
-            grille = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            Draw(grille)
-        elif(w == 'X'):
-            scoreIA += 1
-            print("IA à gagner")
-            grille = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            Draw(grille)
-        elif(TestGrilleFull(grille)):
-            print("Egalité")
-            grille = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-            Draw(grille)
+#Definir la fonction de la boucle du jeu
+    #Assignier 0 à scoreJ1
+    #Assignier 0 à scoreIA
+    #Assignier numéros de chaque cases à grille
+    #Assigner false à whichTurn
+    #Appeler la fonction Draw et lui passert comme paramètre grille
+    #Assigner True à isPlay
+    #Tant que isPlay
+        #Alors
+        #Si whichTurn
+            #Alors 
+            #Assigner le resultat de IAMove prennant comme paramètre grille à nextMove
+            #Assigner à l'index nextMove de grille la valeur 'X'
+            #Assigner False à whichTurn
+            #Appeler la fonction Draw en lui passant pour paramètre grille
+        #Sinon
+            #Alors
+            #Assigner à key le résultat de la fonction input demander à l'utilisateurs qu'elle action veut-il faire
+            #Si key vaut 'S'
+                #Alors imprimer les scores globaux
+            #Sinon si key vaut 'r'
+                #Alors 
+                #Assignier 0 à scoreJ1
+                #Assignier 0 à scoreIA
+            #Sinon si key vaut e
+                #Alors assigner False à isPlay
+            #Sinon
+                #Alors
+                #Assigner la valeur retour de TestCase prennat en paramètre key et grille
+                #Si result vaut 11
+                    #Alors imprimer "case déjà prise"
+                #Sinon si result vaut 10
+                    #Alors imprimer "Mauvais input"
+                #Sinon
+                    #Alors
+                    #Assigner 'O' dans le tableau grille à l'index result
+                    #Aassigner True à isPlay
+                    #Appeller la fonctoni Draw prennant comme paramètre grille
+        #Assigner le résultat de TestWin à w
+        #Si w vaut 'O'
+            #Alors
+            #Incrementer scoreJ1
+            #Imprimer message de victoire
+            #Assigner les valeurs de bases à grille
+            #Appeler la fonction Draw prennant comme paramètre grille
+        #Sinon si w == 'X'
+            #Alors
+            #Incrementer scoreIA
+            #Imprimer message de défaite
+            #Assigner les valeurs de bases à grille
+            #Appeler la fonction Draw prennant comme paramètre grille
+        #Sinon si le resultatde TestGrilleFull prennant comme paramètres grille
+            #Alors
+            #Imprimer message d'égalité
+            #Assigner les valeurs de bases à grille
+            #Appeler la fonction Draw prennant comme paramètre grille
 
-Game()
+#Appeler la Game
