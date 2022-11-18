@@ -1,97 +1,83 @@
 import random
 
-def Round(action)
+def Round(action):
     jAction = int(action)
-    if(jAction < 1 or jAction > 3)
+    if(jAction < 1 or jAction > 3):
         return "Mauvais input"
     iaAction = random.randint(1, 4)
     if(iaAction == jAction):
          return "Egalité"
-    #Si jAction est supérieur à iaAction et iaAction + 1 vaut jAction ou
-    # jAction est inférieur à iaAction et jAction + iaAction vaut 2
-    if((Action > iaAction and iaAction + 1 == jAction) or (jAction < iaAction and jAction + iaAction == 2)):
-        #Alors retourner "Gagner"
+    if((jAction > iaAction and iaAction + 1 == jAction) or (jAction < iaAction and jAction + iaAction == 4)):
         return "Gagner"
-    #Retourner "Perdu"
     return"Perdu"
 
-#Definir la fonction BO
-    #Assigner à entry la valeur retour de l'execution input() qui demande à l'utilisateur en combien sera le BO
-    #Assigner à scoreNeed la valeur retour de l'execution int prennant comme paramètre entry
-    #Assigner à scoreJ 0
-    #Assigner à scoreIA 0
-    #Tant que scoreIA est inférieur à scoreNeed et scoreJ est inférieur à scoreNeed
-        #Alors
-        #Assigner à key la valeur retour de l'execution input qui demande à l'utilisateur l'action qu'il veut faire
-        #Si key vaut 4
-            #Alors imprimer le score actuel
-        #Sinon
-            #Alors
-            #Assigner à result le retour de Round prennant en paramètre key
-            #Si result vaut "Gagner"
-                #Alors incrementer scoreJ
-            #Sinon si result vaut "Perdu"
-                #Alors incrementer scoreIA
-            #Imprimer le résultat
-    #Si scoreIA est supérieur à scoreJ
-        #Alors imprimer le message de défaite
-    #Sinon
-        #Alors imprimer le message de victoire
+def BO():
+    scoreNeed = int(input("\nEn combien sera votre BO\n"))
+    scoreJ = 0
+    scoreIA = 0
+    while(scoreIA < scoreNeed and scoreJ < scoreNeed):
+        key = int(input("\n1: pierre, 2: papier, 3: ciseaux, 4: score\n"))
+        if(key == 4):
+            print("\nJ1: " + str(scoreJ) + "\nIA: " + str(scoreIA))
+        else:
+            result = Round(key)
+            #Si result vaut "Gagner
+            if(result == "Gagner"):
+                scoreJ += 1
+            elif(result == "Perdu"):
+                scoreIA += 1
+            print(result)
+    if(scoreIA > scoreJ):
+        print("\nVous avez perdu\n")
+    else:
+        print("\nVous à gagner\n")
 
-#Definir la fonction PVP
-    #Assigner à scoreJ1 0
-    #Assigner à scoreJ2 0
-    #Tant que vrai
-        #assigner à entry la valeur retour de l'execution de input
-        #assigner à key la valeur retour de int prennant pour paramètre entry
-        #Si key est egal à 4
-            #Alors imprimer les scores
-        #Sinon si key vaut 5
-            #Alors sortir de la boucle
-        #Sinon
-            #Alors
-            #assigner à entry la valeur retour de l'execution de input
-            #assigner à key2 la valeur retour de int prennant pour paramètre entry
-            #Si key est inférieur à 1 ou key supérieur à 3
-            # ou key2 est inférieur à 1 ou key2 supérieur à 3
-                #Alors imprimer "Mauvais input"
-            #Sinon si key vaut key2
-                #Alors imprimer "Egalité"
-            #Sinon si key est supérieur à key2 et key2 + 1 vaut key ou
-            # key est inférieur à key2 et key + key2 vaut 2
-                #Alors incrementer scoreJ1
-                #Imprimer "J1 à gagner"
-            #Sinon
-                #Alors incrementer scoreJ2
-                #Imprimer "J1 à gagner"
-    #Si scoreJ1 est supérieur à scoreJ2
-        #Alors imprimer message victoire J1
-    #Sinon
-        #Alors imprimer message victoire J2
+def PVP():
+    scoreJ1 = 0
+    scoreJ2 = 0
+    while(True):
+        key = int(input("\n1: pierre, 2: papier, 3: ciseaux, 4: score, 5: exit\n"))
+        if(key == 4):
+            print("\nJ1: " + str(scoreJ1) + "\nJ2: " + str(scoreJ2))
+        elif(key == 5):
+            break
+        else:
+            key2 = int(input("\n1: pierre, 2: papier, 3: ciseaux\n"))
+            if(key < 1 or key > 3 or key2 < 1 or key2 > 3):
+                print("\nMauvais input")
+            if(key2 == key):
+                print("\nEgalité\n")
+            elif((key > key2 and key2 + 1 == key) or (key < key2 and key + key2 == 4)):
+                scoreJ1 += 1
+                print("\nJ1 à gagner\n")
+            else:
+                scoreJ2 += 1
+                print("\nJ2 à gagner\n")
+    if(scoreJ1 > scoreJ2):
+        print("\nJ1 à gagner le BO\n")
+    else:
+        print("J2 à gagner la BO")
 
-#Definir la fonction Game
-    #Assigner à scoreJ 0
-    #Assigner à scoreIA 0
-    #Tant que vrai
-    # #Alors
-        #Assigner à key la valeur retour de l'execution input qui demande à l'utilisateur l'action qu'il veut faire
-        #Si key vaut 4
-            #Alors imprimer le score actuel
-        #Sinon si key vaut 5
-            #Alors 
-            #scoreJ = 0
-            #scoreIA = 0
-        #Sinon si key vaut 6
-            #Alors appeler la fonction BO
-        #Sinon si key vaut 7
-            #Alors appeler la fonction  PVP
-        #Sinon
-            #Alors
-            #Assigner à result le retour de l'execution Round prennant en paramètre key
-            #Si result vaut "Gagner"
-                #Alors incrementer scoreJ
-            #Sinon si result vaut "Perdu"
-                #Alors incrementer scoreIA
-            #Imprimer le résultat
-
-#Appeler la fonction Game
+def Game():
+    scoreJ = 0
+    scoreIA = 0
+    while(True):
+        key = int(input("\n1: pierre, 2: papier, 3: ciseaux, 4: score, 5: reset\nGame Mode\n6: BO, 7: PVP\n"))
+        if(key == 4):
+            print("\nJ1: " + str(scoreJ) + "\nJ2: " + str(scoreIA))
+        elif(key == 5):
+            scoreJ = 0
+            scoreIA = 0
+        elif(key == 6):
+            BO()
+        elif(key == 7):
+            PVP()
+        else:
+            result = Round(key)
+            if(result == "Gagner"):
+                scoreJ += 1
+            elif(result == "Perdu"):
+                scoreIA += 1
+            print(result)
+    
+Game()
