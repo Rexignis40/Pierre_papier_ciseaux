@@ -1,6 +1,7 @@
 #a joueur 1 z joueur 2
 
 from copy import deepcopy
+from time import sleep
 
 #Fonction pour afficher dans la console
 def Draw(grille):
@@ -103,6 +104,13 @@ def TestGrilleFull(grille):
             return False
     return True
 
+def SetAllGridWith(grid, c):
+    for i in range(9):
+        grid[i] = c
+        Draw(grid)
+        sleep(0.3)
+    return grid
+
 #Boucle du jeu
 def Game():
     scoreJ1 = 0
@@ -125,6 +133,8 @@ def Game():
                 scoreIA = 0
             elif (key == 'e'):
                 isPlay = False
+            elif (key == 'w'):
+                grille = SetAllGridWith(grille, 'O')
             else:
                 result = TestCase(key, grille)
                 if(result == 11):
